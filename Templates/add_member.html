@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+    <head>
+            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <meta charset="utf-8">
+        <title></title>
+    </head>
+    <body>
+        <div class="container">
+        <h2>บันทึกข้อมูล</h2>
+            <form action="{{ url_for('insert')}}" method="POST">
+                <div class="form-group">
+                    <label for="fname">ชื่อ</label>
+                    <input type="text" class="form-control" name="fname">
+                </div>
+                <div class="form-group">
+                    <label for="lname">นามสกุล</label>
+                    <input type="text" class="form-control" name="lname">
+                </div>
+                <div class="form-group">
+                    <label for="phone">เบอร์โทรศัพท์</label>
+                    <input type="text" class="form-control" name="phone">
+                </div>
+                <a class="btn btn-success" href="/">กลับหน้าแรก</a>
+                <button type="submit" class="pull-right btn btn-primary">บันทึก</button>
+            </form>    
+        </div>
+    </body>
+</html>
