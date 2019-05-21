@@ -5,6 +5,7 @@ import pymysql
 #connect to DB
 app = Flask(__name__)
 conn = pymysql.connect('localhost','root','','memberdb')
+conn1 = pymysql.connect('localhost','root','','fooddb')
 
 #Homepage
 @app.route("/")
@@ -55,6 +56,15 @@ def insert():
             cursor.execute(sql,(fname,lname,phone))
             conn.commit()
         return redirect(url_for('showpage'))    
+
+#Cal
+@app.route("/cal")
+def showdata():
+    with conn1:
+        cur = conn1.cursor()
+        cur.execute("SELECT f.food_id, f.food_name,n1.ingredients_name,n2.ingredients_name,n3.ingredients_name FROM foods f INNER JOIN nutrients n1 ON f.ingredients_p = n1.ingredients_id INNER JOIN nutrients n2 ON f.ingredients_c = n2.ingredients_id INNER JOIN nutrients n3 ON f.ingredients_f = n3.ingredients_id")
+        rows = cur.fetchall()
+    return render_template('cal.html',data=rows)
 
 #debug code
 if __name__ == "__main__":
