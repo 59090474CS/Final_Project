@@ -66,6 +66,11 @@ def showdata():
         rows = cur.fetchall()
     return render_template('cal.html',data=rows)
 
+#Login
+@app.route("/login")
+def login():
+    return render_template('login.html')
+
 #debug code
 if __name__ == "__main__":
     app.run(debug=True)
