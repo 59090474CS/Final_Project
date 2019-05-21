@@ -2,9 +2,11 @@
 from flask import Flask,render_template,request,redirect,url_for
 import pymysql
 
+#connect to DB
 app = Flask(__name__)
 conn = pymysql.connect('localhost','root','','memberdb')
 
+#Homepage
 @app.route("/")
 def showpage():
     with conn:
@@ -13,6 +15,7 @@ def showpage():
         rows = cur.fetchall()
     return render_template('index.html',datas=rows)
 
+#Delete data
 @app.route("/delete/<string:id_data>",methods=['GET'])
 def delete(id_data):
     with conn:
@@ -21,6 +24,7 @@ def delete(id_data):
         conn.commit()
     return redirect(url_for('showpage'))
 
+#Update data
 @app.route("/update",methods=['POST'])
 def update():
     if request.method=="POST":
@@ -34,10 +38,12 @@ def update():
             conn.commit()
         return redirect(url_for('showpage'))
 
+#add data member page
 @app.route("/member")
 def addmember():
     return render_template('add_member.html',)
 
+#Insert data
 @app.route("/insert",methods=['POST'])
 def insert():
     if request.method=="POST":
@@ -50,5 +56,6 @@ def insert():
             conn.commit()
         return redirect(url_for('showpage'))    
 
+#debug code
 if __name__ == "__main__":
     app.run(debug=True)
